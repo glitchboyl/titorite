@@ -1,45 +1,357 @@
-﻿@font-face { font-family: IconFont; src: url('../fonts/iconfont.eot'); src: url('../fonts/iconfont.eot?#iefix') format('embedded-opentype'), url('../fonts/iconfont.woff') format('woff'), url('../fonts/iconfont.ttf') format('truetype'), url('../fonts/iconfont.svg#iconfont') format('svg'); }
-@font-face { font-family: HiraginoSans; src: url("../fonts/Hiragino-Sans.ttf"), url("../fonts/Hiragino-Sans.otf"); }
+﻿@font-face {
+    font-family: IconFont;
+    src: url('../fonts/iconfont.eot');
+    src: url('../fonts/iconfont.eot?#iefix') format('embedded-opentype'), url('../fonts/iconfont.woff') format('woff'), url('../fonts/iconfont.ttf') format('truetype'), url('../fonts/iconfont.svg#iconfont') format('svg');
+}
 
-* { margin: 0; padding: 0; box-sizing: border-box; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; outline: none; }
-html, body { height: 100%; -webkit-app-region: drag; overflow: hidden; position: relative; }
-body { color: #333333; font-size: 14px; font-family: 'Microsoft JhengHei UI','Microsoft JhengHei',HiraginoSans,'Microsoft YaHei UI','Microsoft YaHei'; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-::selection { background: #D9D9D9; }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    outline: none;
+}
 
-#app { height: 100%; background-color: #FFFFFF; border: 1px solid #999999; overflow: hidden; position: relative; }
-#app.focusing { border: 1px solid #F5F5F5; box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.8); }
-#app.maximize { border: 0 !important; box-shadow: none !important; }
-#app .Titorite-container { width: 100%; height: 100%; line-height: 1.5; position: relative; }
-#app .Titorite-container .Titorite-left { width: 50%; height: 100%; left: 0; -webkit-app-region: no-drag; font-size: 15px; font-family: Consolas,'Microsoft JhengHei UI','Microsoft JhengHei','Microsoft YaHei UI','Microsoft YaHei',sans-serif; background-color: #F5F5F5; position: absolute; }
-#app .Titorite-container .Titorite-left #Titorite-editor { width: 100%; height: 100%; }
-#app .Titorite-container .Titorite-spliter { width: 1px; height: calc(100% - 35px - 30px); top: 35px; left: 50%; margin-left: -0.68px; background-color: #E5E5E5; position: absolute; z-index: 10; }
-#app .Titorite-container .Titorite-right { width: 50%; height: 100%; left: 50%; font-size: 16px; font-family: 'Microsoft JhengHei UI','Microsoft JhengHei','Microsoft YaHei UI','Microsoft YaHei',sans-serif; background-color: #FFFFFF; position: absolute; }
-#app .Titorite-container .Titorite-right .content-container { width: calc(100% + 20px); height: 100%; background-color: #FFFFFF; overflow-y: scroll; overflow-x: hidden; }
-#app .Titorite-container .Titorite-right .content-container #content { color: #333333; padding-top: 35px; padding-right: 20px; padding-bottom: 30px; padding-left: 45px; word-wrap: break-word; }
-#app .Titorite-container > * { -webkit-app-region: no-drag; }
-#app .Titorite-container .Titorite-left .cover-top { width: 100%; height: 40px; top: 0; -webkit-app-region: drag !important; background: linear-gradient(to bottom, #F5F5F5 50%, transparent);; z-index: 10; position: absolute; }
-#app .Titorite-container .Titorite-right .cover-top { width: 100%; height: 40px; top: 0; -webkit-app-region: drag !important; background: linear-gradient(to bottom, #FFFFFF 50%, transparent);; z-index: 10; position: absolute; }
+html,
+body {
+    height: 100%;
+    -webkit-app-region: drag;
+    overflow: hidden;
+    position: relative;
+}
 
-#app .window-operation { top: 0px; right: 0px; -webkit-app-region: no-drag; position: fixed; z-index: 100; }
-#app .window-operation > div { width: 30px; height: 25px; text-align: center; padding: 5px; color: #CCCCCC; border-top: 1px solid #999999; display: inline-block; float: left; -webkit-app-region: no-drag; font-family: IconFont; cursor: default; }
-#app.focusing .window-operation div { border-top: 1px solid #FFFFFF; }
-#app.focusing .window-operation div:hover { border-top: 1px solid #E7E7E7; }
-#app .window-operation > div:hover { background-color: #E7E7E7; color: #333333; }
-#app .window-operation > div:active { background-color: #2DB4D8; color: #FFFFFF; border-top: 1px solid #2DB4D8; }
-#app .window-operation .minimize { padding-top: 12px; line-height: 7px; font-size: 13px; }
-#app .window-operation .maximize { font-size: 13px; line-height: 16px; }
-#app .window-operation .restore { font-size: 15px; line-height: 15px; }
-#app .window-operation .close { font-size: 18px; line-height: 15px; }
-#app .window-operation .close:hover { background-color: #E04343; color: #FFFFFF; border-top: 1px solid #E04343 !important; }
-#app .window-operation .close:active { background-color: #993D3D; border-top: 1px solid #993D3D; }
-.maximize #app .window-operation { top: 3px !important; right: 3px !important; }
-.maximize #app .window-operation div { border-top: 0 !important; }
+body {
+    color: #333333;
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
 
-#app .n-resize { width: 100%; height: 6px; top: -1px; -webkit-app-region: no-drag; background: rgba(0,0,0,0); opacity: 0; overflow: hidden; position: absolute; cursor: n-resize; }
-#app .ne-resize { width: 7px; height: 7px; top: -1px; right: -1px; -webkit-app-region: no-drag; background: rgba(0,0,0,0); opacity: 0; overflow: hidden; position: absolute; cursor: ne-resize; }
-#app .e-resize { width: 5px; height: 100%; top: -1px; right: -1px; -webkit-app-region: no-drag; background: rgba(0,0,0,0); opacity: 0; overflow: hidden; position: absolute; cursor: e-resize; }
-#app .se-resize { width: 7px; height: 7px; right: -1px; bottom: -1px; -webkit-app-region: no-drag; background: rgba(0,0,0,0); position: absolute; cursor: se-resize; }
-#app .s-resize { width: 100%; height: 6px; bottom: -1px; -webkit-app-region: no-drag; background: rgba(0,0,0,0); opacity: 0; overflow: hidden; position: absolute; cursor: s-resize; }
-#app .sw-resize { width: 7px; height: 7px; bottom: -1px; left: -1px; -webkit-app-region: no-drag; background: rgba(0,0,0,0); opacity: 0; overflow: hidden; position: absolute; cursor: sw-resize; }
-#app .w-resize { width: 6px; height: 100%; top: -1px; left: -1px; -webkit-app-region: no-drag; background: rgba(0,0,0,0); opacity: 0; overflow: hidden; position: absolute; cursor: w-resize; }
-#app .nw-resize { width: 7px; height: 7px; top: -1px; left: -1px; -webkit-app-region: no-drag; background: rgba(0,0,0,0); opacity: 0; overflow: hidden; position: absolute; cursor: nw-resize; }
+::selection {
+    background: #D9D9D9;
+}
+
+#app {
+    height: 100%;
+    background-color: #FFFFFF;
+    border: 1px solid #999999;
+    overflow: hidden;
+    position: relative;
+}
+
+#app.focusing {
+    border: 1px solid #F5F5F5;
+    box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.8);
+}
+
+#app.maximize {
+    border: 0 !important;
+    box-shadow: none !important;
+}
+
+#app .Titorite-container {
+    width: 100%;
+    height: 100%;
+    line-height: 1.5;
+    position: relative;
+}
+
+#app .Titorite-container .Titorite-left {
+    width: 50%;
+    height: 100%;
+    left: 0;
+    -webkit-app-region: no-drag;
+    font-size: 15px;
+    background-color: #F5F5F5;
+    position: absolute;
+}
+
+#app .Titorite-container .Titorite-left #Titorite-editor {
+    width: 100%;
+    height: 100%;
+}
+
+#app .Titorite-container .Titorite-spliter {
+    width: 1px;
+    height: calc(100% - 35px - 30px);
+    top: 35px;
+    left: 50%;
+    margin-left: -0.68px;
+    background-color: #E5E5E5;
+    position: absolute;
+    z-index: 10;
+}
+
+#app .Titorite-container .Titorite-right {
+    width: 50%;
+    height: 100%;
+    left: 50%;
+    font-size: 16px;
+    background-color: #FFFFFF;
+    position: absolute;
+}
+
+#app .Titorite-container .Titorite-right .content-container {
+    width: calc(100% + 20px);
+    height: 100%;
+    background-color: #FFFFFF;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+#app .Titorite-container .Titorite-right .content-container #content {
+    min-height: 100%;
+    color: #333333;
+    padding-top: 35px;
+    padding-right: 20px;
+    padding-bottom: 30px;
+    padding-left: 45px;
+    word-wrap: break-word;
+}
+
+#app .Titorite-container>* {
+    -webkit-app-region: no-drag;
+}
+
+#app .Titorite-container .Titorite-left .cover-top {
+    width: 100%;
+    height: 40px;
+    top: 0;
+    -webkit-app-region: drag !important;
+    background: linear-gradient(to bottom, #F5F5F5 50%, transparent);
+    z-index: 10;
+    position: absolute;
+}
+
+#app .Titorite-container .Titorite-left .cover-bottom {
+    left: 0;
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+    height: 25px;
+    padding-left: 10px;
+    background-color: #F5F5F5;
+    z-index: 10;
+    border-top: 1px solid rgba(128, 128, 128, 0.3);
+    -webkit-app-region: no-drag;
+}
+
+#app .Titorite-container .Titorite-left .cover-bottom .menu-button {
+    font-family: IconFont;
+    display: inline-block;
+    font-size: 11px;
+    color: #b3b3b3;
+}
+
+#app .Titorite-container .Titorite-right .cover-top {
+    width: 100%;
+    height: 40px;
+    top: 0;
+    -webkit-app-region: drag !important;
+    background: linear-gradient(to bottom, #FFFFFF 50%, transparent);
+    z-index: 10;
+    position: absolute;
+}
+
+#app .Titorite-container .Titorite-right .cover-bottom {
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+    height: 25px;
+    padding-right: 10px;
+    background-color: #FFFFFF;
+    text-align: right;
+    z-index: 10;
+    border-top: 1px solid rgba(128, 128, 128, 0.3);
+    -webkit-app-region: no-drag;
+}
+
+#app .Titorite-container .Titorite-right .cover-bottom .focus-button {
+    font-family: IconFont;
+    display: inline-block;
+    font-size: 16x;
+    color: #b3b3b3;
+}
+
+#app .window-operation {
+    top: 0px;
+    right: 0px;
+    -webkit-app-region: no-drag;
+    position: fixed;
+    z-index: 100;
+}
+
+#app .window-operation>div {
+    width: 30px;
+    height: 25px;
+    text-align: center;
+    padding: 5px;
+    color: #CCCCCC;
+    border-top: 1px solid #999999;
+    display: inline-block;
+    float: left;
+    -webkit-app-region: no-drag;
+    font-family: IconFont;
+    cursor: default;
+}
+
+#app.focusing .window-operation div {
+    border-top: 1px solid #FFFFFF;
+}
+
+#app.focusing .window-operation div:hover {
+    border-top: 1px solid #E7E7E7;
+}
+
+#app .window-operation>div:hover {
+    background-color: #E7E7E7;
+    color: #333333;
+}
+
+#app .window-operation>div:active {
+    background-color: #2DB4D8;
+    color: #FFFFFF;
+    border-top: 1px solid #2DB4D8;
+}
+
+#app .window-operation .minimize {
+    padding-top: 12px;
+    line-height: 6.5px;
+    font-size: 13px;
+}
+
+#app .window-operation .maximize {
+    font-size: 14px;
+    line-height: 17.5px;
+}
+
+#app .window-operation .restore {
+    font-size: 15px;
+    line-height: 15px;
+}
+
+#app .window-operation .close {
+    font-size: 14px;
+    line-height: 12px;
+}
+
+#app .window-operation .close:hover {
+    background-color: #E04343;
+    color: #FFFFFF;
+    border-top: 1px solid #E04343 !important;
+}
+
+#app .window-operation .close:active {
+    background-color: #993D3D;
+    border-top: 1px solid #993D3D;
+}
+
+.maximize #app .window-operation {
+    top: 3px !important;
+    right: 3px !important;
+}
+
+.maximize #app .window-operation div {
+    border-top: 0 !important;
+}
+
+#app .n-resize {
+    width: 100%;
+    height: 6px;
+    top: -1px;
+    -webkit-app-region: no-drag;
+    background: rgba(0, 0, 0, 0);
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    cursor: n-resize;
+}
+
+#app .ne-resize {
+    width: 7px;
+    height: 7px;
+    top: -1px;
+    right: -1px;
+    -webkit-app-region: no-drag;
+    background: rgba(0, 0, 0, 0);
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    cursor: ne-resize;
+}
+
+#app .e-resize {
+    width: 5px;
+    height: 100%;
+    top: -1px;
+    right: -1px;
+    -webkit-app-region: no-drag;
+    background: rgba(0, 0, 0, 0);
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    cursor: e-resize;
+}
+
+#app .se-resize {
+    width: 7px;
+    height: 7px;
+    right: -1px;
+    bottom: -1px;
+    -webkit-app-region: no-drag;
+    background: rgba(0, 0, 0, 0);
+    position: absolute;
+    cursor: se-resize;
+}
+
+#app .s-resize {
+    width: 100%;
+    height: 6px;
+    bottom: -1px;
+    -webkit-app-region: no-drag;
+    background: rgba(0, 0, 0, 0);
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    cursor: s-resize;
+}
+
+#app .sw-resize {
+    width: 7px;
+    height: 7px;
+    bottom: -1px;
+    left: -1px;
+    -webkit-app-region: no-drag;
+    background: rgba(0, 0, 0, 0);
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    cursor: sw-resize;
+}
+
+#app .w-resize {
+    width: 6px;
+    height: 100%;
+    top: -1px;
+    left: -1px;
+    -webkit-app-region: no-drag;
+    background: rgba(0, 0, 0, 0);
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    cursor: w-resize;
+}
+
+#app .nw-resize {
+    width: 7px;
+    height: 7px;
+    top: -1px;
+    left: -1px;
+    -webkit-app-region: no-drag;
+    background: rgba(0, 0, 0, 0);
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    cursor: nw-resize;
+}

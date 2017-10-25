@@ -57,4 +57,5 @@
   @import './assets/style/style.css';
   @import './assets/style/codemirror.css';
   @import './assets/style/github-markdown.css';
+  @import './assets/style/theme/base16-light.css';
 </style>

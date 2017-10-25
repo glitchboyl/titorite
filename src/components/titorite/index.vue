@@ -1,6 +1,6 @@
 <template>
   <div class="Titorite-container">
-    <left-part ref="editorContainer" @dragover.prevent="wecan" @drop.prevent="ass($event)"></left-part>
+    <left-part ref="editorContainer"></left-part>
     <div class="Titorite-spliter"></div>
     <right-part ref="contentContainer"></right-part>
   </div>
@@ -38,7 +38,7 @@
         lineWrapping: true,
         scrollbarStyle: null,
         showCursorWhenSelecting: true,
-        theme: "default"
+        theme: "base16-light"
       });
       Titorite.on('change', () => {
         Content.innerHTML = marked(Titorite.getValue());
@@ -50,12 +50,6 @@
     components: {
       leftPart,
       rightPart
-    },
-    methods:{
-      ass(event){
-        console.log(event)
-      },
-      wecan(){}
     }
   };
 </script>

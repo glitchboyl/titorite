@@ -6777,6 +6777,7 @@ export default (() => {
   // Apply a change to a document, and add it to the document's
   // history, and propagating it to all linked documents.
   function makeChange(doc, change, ignoreReadOnly) {
+    // debugger
     if (doc.cm) {
       if (!doc.cm.curOp) {
         return operation(doc.cm, makeChange)(doc, change, ignoreReadOnly)
