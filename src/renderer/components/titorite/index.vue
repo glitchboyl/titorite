@@ -1,8 +1,9 @@
 <template>
-  <div class="Titorite-container">
+  <div class="Titorite-container" :class=[mode]>
     <left-part ref="editorContainer"></left-part>
     <div class="Titorite-spliter"></div>
     <right-part ref="contentContainer"></right-part>
+    <cover-bottom></cover-bottom>
   </div>
 </template>
 
@@ -18,11 +19,17 @@
   import highlight from 'highlight.js';
   import leftPart from './left-part';
   import rightPart from './right-part';
+  import coverBottom from './cover-bottom';
   export default {
     name: 'Titorite',
     data() {
       return {
         scroll: null
+      }
+    },
+    computed: {
+      mode() {
+        return this.$store.state.mode
       }
     },
     mounted() {
@@ -74,7 +81,8 @@
     },
     components: {
       leftPart,
-      rightPart
+      rightPart,
+      coverBottom
     }
   };
 </script>

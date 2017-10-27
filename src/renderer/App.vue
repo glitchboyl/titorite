@@ -1,6 +1,7 @@
 <template>
   <div id="app" :class="{maximize,focusing,blurred}" tabindex="0">
     <titorite></titorite>
+    <menu-cover></menu-cover>
     <operation :isMaximized="maximize"></operation>
     <div class="n-resize"></div>
     <div class="ne-resize"></div>
@@ -19,6 +20,7 @@
     ipcRenderer
   } from 'electron';
   import titorite from './components/titorite';
+  import menuCover from './components/menu';
   import operation from './components/window-operation';
   export default {
     name: 'main-window',
@@ -48,6 +50,7 @@
     },
     components: {
       titorite,
+      menuCover,
       operation
     }
   };

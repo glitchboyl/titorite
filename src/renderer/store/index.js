@@ -1,11 +1,16 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from 'vue';
+import Vuex from 'vuex';
+import mutations from './mutations';
 
-import modules from './modules'
+Vue.use(Vuex);
 
-Vue.use(Vuex)
+const state = {
+  isSideMenuOpened: false,
+  isPopupMenuOpened: false,
+  mode: 'preview'
+}
 
 export default new Vuex.Store({
-  modules,
-  strict: process.env.NODE_ENV !== 'production'
+  state,
+  mutations
 })

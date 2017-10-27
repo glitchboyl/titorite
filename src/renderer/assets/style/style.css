@@ -58,13 +58,22 @@ body {
 }
 
 #app .Titorite-container .Titorite-left {
+    left: 0;
     width: 50%;
     height: 100%;
-    left: 0;
     -webkit-app-region: no-drag;
     font-size: 15px;
     background-color: #F5F5F5;
     position: absolute;
+    transition: width .55s ease-in-out, left .55s ease-in-out;
+}
+
+#app .Titorite-container.writing .Titorite-left {
+    width: 100%;
+}
+
+#app .Titorite-container.reading .Titorite-left {
+    left: -50%;
 }
 
 #app .Titorite-container .Titorite-left #Titorite-editor {
@@ -76,20 +85,42 @@ body {
     width: 1px;
     height: calc(100% - 35px - 30px);
     top: 35px;
-    left: 50%;
     margin-left: -0.68px;
     background-color: #E5E5E5;
     position: absolute;
     z-index: 10;
+    transition: left .55s ease-in-out;
+}
+
+#app .Titorite-container.writing .Titorite-spliter {
+    left: calc(100% + 1px);
+}
+
+#app .Titorite-container.reading .Titorite-spliter {
+    left: 0%;
+}
+
+#app .Titorite-container.preview .Titorite-spliter {
+    left: 50%;
 }
 
 #app .Titorite-container .Titorite-right {
+    left: 50%;
     width: 50%;
     height: 100%;
-    left: 50%;
     font-size: 16px;
     background-color: #FFFFFF;
     position: absolute;
+    transition: width .55s ease-in-out, left .55s ease-in-out;
+}
+
+#app .Titorite-container.writing .Titorite-right {
+    left: 100%;
+}
+
+#app .Titorite-container.reading .Titorite-right {
+    width: 100%;
+    left: 0;
 }
 
 #app .Titorite-container .Titorite-right .content-container {
@@ -114,64 +145,207 @@ body {
     -webkit-app-region: no-drag;
 }
 
-#app .Titorite-container .Titorite-left .cover-top {
+#app .Titorite-container .cover-top {
     width: 100%;
     height: 40px;
     top: 0;
     -webkit-app-region: drag !important;
-    background: linear-gradient(to bottom, #F5F5F5 50%, transparent);
     z-index: 10;
     position: absolute;
 }
 
-#app .Titorite-container .Titorite-left .cover-bottom {
+#app .Titorite-container .cover-bottom {
     left: 0;
     bottom: 0;
     position: absolute;
     width: 100%;
     height: 25px;
-    padding-left: 10px;
-    background-color: #F5F5F5;
+    padding: 0 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
     z-index: 10;
     border-top: 1px solid rgba(128, 128, 128, 0.3);
     -webkit-app-region: no-drag;
 }
 
-#app .Titorite-container .Titorite-left .cover-bottom .menu-button {
+#app .Titorite-container .cover-bottom .sidemenu-button {
     font-family: IconFont;
     display: inline-block;
     font-size: 11px;
     color: #b3b3b3;
+    transition: color .3s;
 }
 
-#app .Titorite-container .Titorite-right .cover-top {
-    width: 100%;
-    height: 40px;
-    top: 0;
-    -webkit-app-region: drag !important;
-    background: linear-gradient(to bottom, #FFFFFF 50%, transparent);
-    z-index: 10;
-    position: absolute;
+#app .Titorite-container .cover-bottom .sidemenu-button:hover {
+    cursor: pointer;
+    color: #555555;
 }
 
-#app .Titorite-container .Titorite-right .cover-bottom {
-    bottom: 0;
-    position: absolute;
-    width: 100%;
-    height: 25px;
-    padding-right: 10px;
-    background-color: #FFFFFF;
-    text-align: right;
-    z-index: 10;
-    border-top: 1px solid rgba(128, 128, 128, 0.3);
-    -webkit-app-region: no-drag;
-}
-
-#app .Titorite-container .Titorite-right .cover-bottom .focus-button {
+#app .Titorite-container .cover-bottom .popupmenu-button {
     font-family: IconFont;
     display: inline-block;
-    font-size: 16x;
+    font-size: 16px;
     color: #b3b3b3;
+    cursor: default;
+    transition: color .3s;
+}
+
+#app .Titorite-container .cover-bottom .popupmenu-button:hover {
+    color: #555555;
+}
+
+#app .Titorite-container .cover-bottom .popupmenu-button.active {
+    color: #333333;
+}
+
+#app .Titorite-container .cover-bottom .popupmenu-button.active:hover {
+    color: #333333;
+}
+
+#app .side-menu {
+    width: 300px;
+    margin-left: -300px;
+    height: 100%;
+    background: #fafafa;
+    transition: margin-left .4s ease-in-out;
+    padding-top: 45px;
+    padding-bottom: 45px;
+    cursor: default;
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-right: 1px solid #ccc;
+}
+
+#app .opened .side-menu {
+    margin-left: 0;
+}
+
+#app .side-menu .logo {
+    font-family: Raleway;
+    font-size: 35px;
+    font-weight: lighter;
+    letter-spacing: 10px;
+    text-align: center;
+    color: #666;
+    border-bottom: 1px solid #ececec;
+    background-image: url("../cat.png");
+    padding-bottom: 100px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 50%;
+}
+
+#app .side-menu ul {
+    margin-top: 10px;
+    padding: 0;
+    color: #444;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+#app .side-menu ul li {
+    font-family: Roboto, Helvetica, 'Segoe UI', Arial, sans-serif;
+    list-style-type: none;
+    height: 50px;
+    line-height: 50px;
+    padding-left: 30px;
+    text-align: left;
+    vertical-align: middle;
+}
+
+#app .side-menu ul li:hover {
+    background-color: rgb(236, 236, 236);
+}
+
+#app .side-menu ul li:active {
+    background-color: rgb(222, 222, 222);
+}
+
+#app .side-menu ul li.break {
+    height: 10px;
+    pointer-events: none;
+    border-bottom: 1px solid #ececec;
+    margin-bottom: 10px;
+}
+
+#app .popup-menu {
+    width: 232px;
+    bottom: 22px;
+    right: 0px;
+    outline: none;
+    position: fixed;
+    pointer-events: all;
+    cursor: default;
+    -webkit-user-select: none;
+    display: none;
+}
+
+#app .popup-menu.opened {
+    display: block;
+}
+
+#app .popup-menu ul {
+    padding-left: 0;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    background-color: #fafafa;
+}
+
+#app .popup-menu ul li {
+    width: 100%;
+    list-style-type: none;
+    line-height: 20px;
+    display: inline-flex;
+    align-items: center;
+    padding: 10px;
+    letter-spacing: 1px;
+    color: #444;
+    font-family: Roboto, Helvetica, 'Segoe UI', Arial, sans-serif;
+}
+
+#app .popup-menu ul li:before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    margin-right: 8px;
+}
+
+#app .popup-menu ul li.active:before {
+    content: '\e637';
+    font-family: IconFont;
+    font-size: 20px;
+}
+
+#app .popup-menu ul li:hover {
+    background-color: rgb(236, 236, 236);
+}
+
+#app .popup-menu ul li:active {
+    background-color: rgb(222, 222, 222);
+}
+
+#app .popup-menu ul li .fa {
+    margin-right: 8px;
+    opacity: 0;
+}
+
+#app .menu-cover {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1000001;
+    transition: background-color .5s ease-in-out;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+}
+
+#app .menu-cover.opened {
+    background-color: rgba(77, 77, 77, 0.2);
+    pointer-events: auto;
 }
 
 #app .window-operation {
@@ -205,7 +379,7 @@ body {
 }
 
 #app .window-operation>div:hover {
-    background-color: #E7E7E7;
+    background-color: rgba(196, 196, 196, 0.4);
     color: #333333;
 }
 
@@ -237,14 +411,14 @@ body {
 }
 
 #app .window-operation .close:hover {
-    background-color: #E04343;
+    background-color: #e81123;
     color: #FFFFFF;
-    border-top: 1px solid #E04343 !important;
+    border-top: 1px solid #e81123 !important;
 }
 
 #app .window-operation .close:active {
-    background-color: #993D3D;
-    border-top: 1px solid #993D3D;
+    background-color: #c0091b;
+    border-top: 1px solid #c0091b;
 }
 
 .maximize #app .window-operation {
