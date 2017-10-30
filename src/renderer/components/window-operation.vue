@@ -14,6 +14,9 @@
     name: 'window-operation',
     props: ['isMaximized'],
     computed: {
+      Titorite() {
+        return this.$store.state.Titorite;
+      },
       resize() {
         let self = this;
         let isMaximized = self.isMaximized;
@@ -22,6 +25,12 @@
           title: isMaximized ? `Restore` : `Maximize`,
           method: isMaximized ? self.restore : self.maximize,
         }
+      },
+      isEdited() {
+        return this.$store.state.isEdited;
+      },
+      path() {
+        return this.$store.state.filePath;
       }
     },
     methods: {
@@ -35,7 +44,8 @@
         ipcRenderer.send('restore-main-window');
       },
       close() {
-        ipcRenderer.send('close-main-window');
+        let self = this;
+        self.isEdited ? ipcRenderer.send('show-ask-dialog-then-close', self.Titorite.getValue(), self.path) : ipcRenderer.send('close-main-window');
       }
     }
   };

@@ -1,10 +1,20 @@
 ﻿import {
+  setTitorite,
   toggleSideMenu,
   togglePopupMenu,
-  modeChange
+  modeChange,
+  editing,
+  toggleTip,
+  tipChange,
+  saveFilePath
 } from './mutations-types';
 
 export default {
+  [setTitorite](state, {
+    Titorite
+  }) {
+    state.Titorite = Titorite;
+  },
   [toggleSideMenu](state, {
     status
   }) {
@@ -19,5 +29,23 @@ export default {
     mode
   }) {
     state.mode = mode;
+  },
+  [editing](state, {
+    status
+  }) {
+    state.isEdited = status;
+  },
+  [toggleTip](state, {
+    status
+  }) {
+    state.isTipShowed = status;
+  },
+  [tipChange](state, tip) {
+    state.tip = tip;
+  },
+  [saveFilePath](state, {
+    path
+  }) {
+    state.filePath = path;
   }
 }

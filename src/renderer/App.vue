@@ -3,6 +3,7 @@
     <titorite></titorite>
     <menu-cover></menu-cover>
     <operation :isMaximized="maximize"></operation>
+    <tip></tip>
     <div class="n-resize"></div>
     <div class="ne-resize"></div>
     <div class="e-resize"></div>
@@ -21,6 +22,7 @@
   } from 'electron';
   import titorite from './components/titorite';
   import menuCover from './components/menu';
+  import tip from './components/tip';
   import operation from './components/window-operation';
   export default {
     name: 'main-window',
@@ -51,6 +53,7 @@
     components: {
       titorite,
       menuCover,
+      tip,
       operation
     }
   };

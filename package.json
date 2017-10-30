@@ -1,9 +1,9 @@
 {
   "name": "titorite",
-  "productName": "titorite",
+  "productName": "Titorite",
   "version": "0.0.0",
   "author": "LonelyLiaR <lonelyliar8523@gmail.com>",
-  "description": "An electron-vue project",
+  "description": "A Markdown editor desktop application. Based on CodeMirror.",
   "license": null,
   "main": "./dist/electron/main.js",
   "scripts": {
