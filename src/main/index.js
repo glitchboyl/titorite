@@ -5,6 +5,7 @@ import {
   ipcMain
 } from 'electron';
 import fs from 'fs';
+import pdf from 'html-pdf';
 
 /**
  * Set `__static` path to static files in production
@@ -208,5 +209,54 @@ ipcMain.on('show-open-dialog', (event) => {
         if (err) throw err;
         event.sender.send('open-file', path[0], data.toString());
       });
+  })
+});
+ipcMain.on('export-as-html', (event, html) => {
+  dialog.showSaveDialog({
+    title: '保存到',
+    filters: [{
+      name: 'HTML 文档',
+      extensions: ['html', 'htm', 'xhtml']
+    }]
+  }, (path) => {
+    if (path) {
+      event.sender.send('exporting');
+      fs.writeFile(path, html, (err) => {
+        if (err) throw err;
+        event.sender.send('exported-success', path);
+      });
+    }
+  })
+});
+ipcMain.on('export-as-pdf', (event, html) => {
+  dialog.showSaveDialog({
+    title: '保存到',
+    filters: [{
+      name: 'PDF 文档',
+      extensions: ['pdf']
+    }]
+  }, (path) => {
+    if (path) {
+      let seg = path.split('\\');
+      let fileName = seg[seg.length - 1];
+      let timestamp = new Date().getTime();
+      seg[seg.length - 1] = `${fileName.slice(0, fileName.match(/.pdf$/).index)}${timestamp}.html`;
+      seg = seg.join('\\');
+      new Promise((resolve, reject) => {
+        fs.writeFile(seg, html, (err) => {
+          if (err) throw err;
+          event.sender.send('exporting');
+          resolve(fs.readFileSync(seg, 'utf8'));
+        });
+      }).then((file) => {
+        pdf.create(file, {
+          format: 'Letter'
+        }).toFile(path, function (err, res) {
+          if (err) throw err;
+          event.sender.send('exported-success', path);
+          fs.unlinkSync(seg);
+        });
+      });
+    }
   })
 });

@@ -35,7 +35,7 @@ const state = {
       }, 2500)
     }).then(() => {
       setTimeout(() => {
-        Store.commit('tip-change', {
+        if (!Store.state.isTipShowed) Store.commit('tip-change', {
           type: 'default',
           message: ''
         });

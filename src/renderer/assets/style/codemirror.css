@@ -73,7 +73,7 @@
 
 .cm-fat-cursor .CodeMirror-cursor {
     width: auto;
-    border: 0 !important;
+    border: 0;
     background: #7e7;
 }
 
@@ -328,15 +328,15 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {
     /* Things will break if this is overridden */
     /* 30px is the magic margin used to hide the element's real scrollbars */
     /* See overflow: hidden in .CodeMiroir */
-    overflow: hidden !important;
-    overflow-x: hidden !important;
-    overflow-y: scroll !important;
+    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: scroll;
     padding-top: 35px;
     padding-right: 20px;
     padding-bottom: 30px;
     padding-left: 45px;
     height: calc(100% - 35px - 30px);
-    width: calc(100% - 45px - 20px - 24px + 40px) !important;
+    width: calc(100% - 45px - 20px - 24px + 40px);
     outline: none;
     /* Prevent dragging from highlighting the element */
     position: relative;
@@ -404,8 +404,8 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {
 .CodeMirror-gutter-wrapper {
     position: absolute;
     z-index: 4;
-    background: none !important;
-    border: none !important;
+    background: none;
+    border: none;
 }
 
 .CodeMirror-gutter-background {

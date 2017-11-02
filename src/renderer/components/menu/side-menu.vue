@@ -7,8 +7,8 @@
       <li @click="saveFile">保存</li>
       <li @click="saveAsFile">另存为</li>
       <li class="break"></li>
-      <li>导出为HTML</li>
-      <li>导出为PDF</li>
+      <li @click="exportAsHTML">导出为HTML</li>
+      <li @click="exportAsPDF">导出为PDF</li>
       <li class="break"></li>
       <!-- <li>设置</li> -->
       <li>关于</li>
@@ -18,8 +18,10 @@
 
 <script>
   import {
-    ipcRenderer
+    ipcRenderer,
+    shell
   } from 'electron';
+  import fs from 'fs';
   export default {
     name: 'side-menu',
     computed: {
@@ -31,6 +33,9 @@
       },
       path() {
         return this.$store.state.filePath;
+      },
+      isTipShowed() {
+        return this.$store.state.isTipShowed;
       }
     },
     methods: {
@@ -101,6 +106,74 @@
       },
       saveAsFile() {
         ipcRenderer.send('show-save-dialog', this.Titorite.getValue());
+      },
+      exportAs(type) {
+        let self = this;
+        new Promise((resolve, reject) => {
+          fs.access('./resources', (err) => {
+            if (!err) {
+              resolve('/resources/app.asar');
+            }
+            resolve('');
+          })
+        }).then((_path) => {
+          return new Promise((resolve, reject) => {
+            fs.readFile(`.${_path}/dist/electron/static/github-markdown.min.css`, 'utf-8', (err, data) => {
+              if (err) throw err;
+              resolve(data.toString());
+            });
+          })
+        }).then((stylesheet) => {
+          let doc = document.implementation.createHTMLDocument();
+          const head = doc.querySelector('head');
+          const body = doc.querySelector('body');
+          const meta = doc.createElement('meta');
+          const style = doc.createElement('style');
+          const title = doc.createElement('title');
+          meta.setAttribute('charset', 'utf-8');
+          head.appendChild(meta);
+          head.appendChild(title);
+          style.innerHTML = stylesheet;
+          head.appendChild(style);
+          body.setAttribute('class', 'markdown-body');
+          body.innerHTML = document.querySelector('#content').cloneNode(true).innerHTML;
+          ipcRenderer.send(`export-as-${type}`, `<!DOCTYPE html><html>${doc.querySelector('html').innerHTML}</html>`);
+          ipcRenderer.once('exporting', (event) => {
+            self.$store.commit('toggle-side-menu', {
+              status: false
+            });
+            self.$store.state.tipping({
+              type: 'info',
+              message: `正在导出${type.toUpperCase()}, 请稍后...`
+            });
+            ipcRenderer.once('exported-success', (event, path) => {
+              new Promise((resolve, reject) => {
+                setTimeout(() => {
+                  shell.openItem(path);
+                  resolve();
+                }, 1200);
+              }).then(() => {
+                if (self.isTipShowed) {
+                  self.$store.commit('toggle-tip', {
+                    status: false
+                  });
+                }
+                setTimeout(() => {
+                  self.$store.state.tipping({
+                    type: 'success',
+                    message: '导出成功。'
+                  });
+                }, type == 'pdf' ? 0 : 300);
+              })
+            });
+          });
+        })
+      },
+      exportAsHTML() {
+        this.exportAs('html');
+      },
+      exportAsPDF() {
+        this.exportAs('pdf');
       }
     }
   }

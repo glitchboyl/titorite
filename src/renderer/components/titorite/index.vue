@@ -75,8 +75,60 @@
           }
         },
         'Ctrl-B' (editor) {
-          console.log(editor.doc.getLine(editor.doc.listSelections()[0].head.line))
-          console.log(editor.doc.getLine(editor.doc.listSelections()[0].anchor.line))
+          var str = editor.doc.getSelection().trim();
+          if (str === "") {
+            return;
+          }
+          if (str.indexOf("**") != -1) {
+            if (str.indexOf("**") != str.lastIndexOf("**")) {
+              if (str.indexOf("**") == 0 && str.lastIndexOf("**") == str.length - 2) {
+                str = str.replace(new RegExp("\\*+\\*", "gm"), "");
+              } else {
+                str = "**" + str.replace(new RegExp("\\*+\\*", "gm"), "") + "**";
+              }
+            } else {
+              str = "**" + str.replace("**", "");
+            }
+          } else {
+            str = "**" + str + "**";
+          }
+          editor.doc.replaceSelection(str);
+          //editor.doc.getSelection() = "**"+editor.doc.getSelection()+"**";
+        },
+        'Ctrl-I' (editor) {
+          var str = editor.doc.getSelection().trim();
+          if (str === "") {
+            return;
+          }
+          if (str.indexOf("**") == -1) {
+            if (str.indexOf("*") != str.lastIndexOf("*")) {
+              if (str.indexOf("**") == 0 && str.lastIndexOf("**") == str.length - 1) {
+                str = str.replace(new RegExp("\\*", "gm"), "");
+              } else {
+                str = "*" + str.replace(new RegExp("\\*", "gm"), "") + "*";
+              }
+            } else {
+              str = "*" + str.replace("*", "") + "*";
+            }
+          } else {
+            str = "*" + str + "*";
+          }
+          editor.doc.replaceSelection(str);
+          //editor.doc.getSelection() = "**"+editor.doc.getSelection()+"**";
+        },
+        'Ctrl-H' (editor) {
+          console.log(editor.doc.getCursor());
+          console.log(editor.doc.getSelection(editor.doc.getCursor()));
+          var str = editor.doc.getSelection().trim();
+          if (str === "") {
+            return;
+          }
+          if (str.indexOf("#") != 0) {
+            str = "\n# " + str;
+          } else if (str.indexOf("#") == 0) {
+            str = "#" + str;
+          }
+          editor.doc.replaceSelection(str);
         }
       });
       Titorite.on('change', (editor) => {

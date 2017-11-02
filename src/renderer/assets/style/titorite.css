@@ -210,8 +210,7 @@ body {
     height: 100%;
     background: #fafafa;
     transition: margin-left .4s ease-in-out;
-    padding-top: 45px;
-    padding-bottom: 45px;
+    padding-top: 50px;
     cursor: default;
     z-index: 1;
     position: absolute;
@@ -225,12 +224,6 @@ body {
 }
 
 #app .side-menu .logo {
-    font-family: Raleway;
-    font-size: 35px;
-    font-weight: lighter;
-    letter-spacing: 10px;
-    text-align: center;
-    color: #666;
     border-bottom: 1px solid #ececec;
     background-image: url("../cat.png");
     padding-bottom: 100px;
@@ -333,20 +326,41 @@ body {
     opacity: 0
 }
 
-#app .menu-cover {
+#app .menu-cover,
+#app .about-cover {
     position: absolute;
     width: 100%;
     height: 100%;
-    z-index: 1000001;
+    z-index: 100;
     transition: background-color .5s ease-in-out;
     pointer-events: none;
     top: 0;
     left: 0
 }
 
-#app .menu-cover.opened {
+#app .menu-cover.opened,
+#app .about-cover {
     background-color: rgba(77, 77, 77, 0.2);
     pointer-events: auto
+}
+
+#app .about-cover .about {
+    width: 550px;
+    margin: 20% auto;
+    padding: 25px 0;
+    background-color: #FFFFFF;
+    border-radius: 1px;
+    box-shadow: 0px 0px 5px #555555;
+}
+
+#app .about-header {
+    border-bottom: 1px solid #ccc;
+    padding: 0 25px;
+}
+
+#app .about-header img.logo {
+    width: 120px;
+    margin-bottom: -5px;
 }
 
 #app .window-operation {
@@ -521,7 +535,7 @@ body {
     right: 0;
     position: fixed;
     background-color: #fff;
-    padding: 8px 0;
+    padding: 10px 0;
     border-bottom: 1px solid #e2e2e2;
     z-index: 1;
     font-size: .9rem;
@@ -534,9 +548,8 @@ body {
     width: 400px;
     max-width: 80%;
     left: 50%;
-    right: none;
-    -ms-transform: translateX(-50%) translateY(-110%);
-    transform: translateX(-50%) translateY(-110%);
+    -ms-transform: translateX(-50%) translateY(-115%);
+    transform: translateX(-50%) translateY(-115%);
     box-shadow: 0 1px 2px rgba(0, 0, 0, .5);
     border-bottom: none;
     border-radius: 0 0 2px 2px
@@ -544,6 +557,7 @@ body {
 
 #app .tip-main {
     padding: 0 40px 0 20px;
+    font-family: Roboto, Helvetica, 'Segoe UI', Arial, sans-serif;
     word-wrap: break-word
 }
 

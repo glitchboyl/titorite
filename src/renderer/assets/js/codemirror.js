@@ -4850,7 +4850,7 @@ export default (() => {
   function updateScrollbarsInner(cm, measure) {
     var d = cm.display;
     var sizes = d.scrollbars.update(measure);
-
+    
     d.sizer.style.paddingRight = (d.barWidth = sizes.right) + "px";
     d.sizer.style.paddingBottom = (d.barHeight = sizes.bottom) + "px";
     d.heightForcer.style.borderBottom = sizes.bottom + "px solid transparent";

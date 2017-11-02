@@ -2,8 +2,9 @@
   <div id="app" :class="{maximize,focusing,blurred}" tabindex="0">
     <titorite></titorite>
     <menu-cover></menu-cover>
-    <operation :isMaximized="maximize"></operation>
     <tip></tip>
+    <!-- <about></about> -->
+    <operation :isMaximized="maximize"></operation>
     <div class="n-resize"></div>
     <div class="ne-resize"></div>
     <div class="e-resize"></div>
@@ -23,6 +24,7 @@
   import titorite from './components/titorite';
   import menuCover from './components/menu';
   import tip from './components/tip';
+  import about from './components/about';
   import operation from './components/window-operation';
   export default {
     name: 'main-window',
@@ -49,19 +51,21 @@
       ipcRenderer.on('unmaximized', function() {
         self.maximize = false;
       });
+      document.querySelectorAll('a')
     },
     components: {
       titorite,
       menuCover,
       tip,
+      about,
       operation
     }
   };
 </script>
 
 <style>
-  @import './assets/style/style.css';
-  @import './assets/style/codemirror.css';
-  @import './assets/style/github-markdown.css';
+  @import './assets/style/titorite.css';
+  @import './assets/style/codemirror.min.css';
+  @import './assets/style/github-markdown.min.css';
   @import './assets/style/theme/base16-light.css';
 </style>
