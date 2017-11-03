@@ -9,7 +9,8 @@
 
 <script>
   import {
-    ipcRenderer
+    ipcRenderer,
+    shell
   } from 'electron';
   import CodeMirror from '@/assets/js/codemirror';
   import Currying from '@/assets/js/currying';
@@ -117,8 +118,6 @@
           //editor.doc.getSelection() = "**"+editor.doc.getSelection()+"**";
         },
         'Ctrl-H' (editor) {
-          console.log(editor.doc.getCursor());
-          console.log(editor.doc.getSelection(editor.doc.getCursor()));
           var str = editor.doc.getSelection().trim();
           if (str === "") {
             return;
@@ -136,6 +135,9 @@
           status: true
         });
         Content.innerHTML = marked(editor.getValue());
+        Content.querySelectorAll('a').forEach((that) => {
+          that.addEventListener('click', self.openExternal)
+        })
       });
       Titorite.on('drop', (editor, event) => {
         event.preventDefault();
@@ -204,6 +206,12 @@
           path
         });
       })
+    },
+    methods: {
+      openExternal(event) {
+        event.preventDefault();
+        shell.openExternal(event.target.href)
+      }
     },
     components: {
       leftPart,
