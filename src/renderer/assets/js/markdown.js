@@ -1,7 +1,7 @@
 // CodeMirror, copyright (c) by Marijn Haverbeke and others
 // Distributed under an MIT license: http://codemirror.net/LICENSE
 
-export default (CodeMirror) => {
+export default CodeMirror => {
   "use strict";
 
   CodeMirror.defineMode("markdown", function (cmCfg, modeCfg) {
