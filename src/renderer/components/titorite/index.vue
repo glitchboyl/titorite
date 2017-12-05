@@ -13,7 +13,7 @@
     shell
   } from 'electron';
   import CodeMirror from '@/assets/js/codemirror';
-  import Currying from '@/assets/js/currying';
+  import RUP from '@/assets/js/rup';
   import xml from '@/assets/js/xml';
   import markdown from '@/assets/js/markdown';
   import overlay from '@/assets/js/overlay';
@@ -54,7 +54,7 @@
           return highlight.highlightAuto(code).value;
         }
       });
-      Currying(CodeMirror)(xml)(markdown)(overlay)(gfm)(javascript);
+      RUP(CodeMirror, [xml, markdown, overlay, gfm, javascript]);
       const Titorite = CodeMirror(Editor, {
         mode: {
           name: "gfm"

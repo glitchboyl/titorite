@@ -166,7 +166,6 @@ body {
     justify-content: space-between;
     z-index: 10;
     border-top: 1px solid rgba(128, 128, 128, 0.3);
-    background: linear-gradient(to right, #F5F5F5 50%, #FFFFFF 50%);
     -webkit-app-region: no-drag
 }
 

@@ -64,7 +64,7 @@
 </script>
 
 <style>
-  @import './assets/style/titorite.css';
+  @import './assets/style/titorite.min.css';
   @import './assets/style/codemirror.min.css';
   @import './assets/style/github-markdown.min.css';
   @import './assets/style/theme/base16-light.css';
