@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "highlight.js": "^9.12.0",
+    "html-pdf": "^2.2.0",
     "marked": "^0.3.6",
     "v-click-outside": "^0.1.4",
     "vue": "^2.3.3",
@@ -43,7 +44,7 @@
     "css-loader": "^0.28.4",
     "del": "^3.0.0",
     "devtron": "^1.4.0",
-    "electron": "^1.7.5",
+    "electron": "^1.8.4",
     "electron-debug": "^1.4.0",
     "electron-devtools-installer": "^2.2.0",
     "electron-packager": "^8.5.0",

@@ -23,13 +23,16 @@ git clone https://github.com/LonelyLiaR/Titorite
 cd Titorite
 
 # install dependencies
-npm install
+npm install / yarn
+
+# pack the repo
+npm run pack / yarn run pack
 
 # serve with hot reload at localhost:9080
-npm run dev
+npm run dev / yarn run dev
 
 # build for production with minification
-npm run build
+npm run build / yarn run build
 
 # build for production and view the bundle analyzer report
 npm run build --report
@@ -37,4 +40,4 @@ npm run build --report
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
-If you have any questions, please submit issues, thks. :facepunch:
+This repo is just for fun. :yum:
