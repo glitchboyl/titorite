@@ -2,7 +2,7 @@
 
 A Markdown editor desktop application. Based on [Electron](https://electron.atom.io/) and [CodeMirror](https://github.com/codemirror/CodeMirror).
 
-[Demo gif](http://ozep0l2jz.bkt.clouddn.com/demo.gif)
+[Demo gif](https://i.loli.net/2019/02/28/5c778b454456e.gif)
 
 ## Version
 1.0
