@@ -17,7 +17,7 @@ A Markdown editor desktop application. Based on [Electron](https://electron.atom
 
 ``` bash
 # clone this repo
-git clone https://github.com/LonelyLiaR/Titorite
+git clone https://github.com/glitchboyl/Titorite
 
 # cd to dir
 cd Titorite
